@@ -1,0 +1,48 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.8
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    github.com/madgeek-arc/registry:
+      branch: master
+      repo: https://github.com/madgeek-arc/registry.git
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      github.com/madgeek-arc/registry git:
+        commands:
+        - /usr/bin/env sh .sqa/script.jumpy-persimmon-urchin.sh
+        container: qc.acc_snappy-red-buzzard
+  QC.Doc:
+    repos:
+      github.com/madgeek-arc/registry find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-viridian-liger.sh
+        container: qc.doc_leaky-cobalt-hedgehog
+      github.com/madgeek-arc/registry git:
+        commands:
+        - /usr/bin/env sh .sqa/script.foggy-mustard-kangaroo.sh
+        container: qc.doc_snappy-grey-setter
+  QC.Lic:
+    repos:
+      github.com/madgeek-arc/registry licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.crappy-rust-buffalo.sh
+        container: qc.lic_freaky-firebrick-barracuda
+  QC.Sty:
+    repos:
+      github.com/madgeek-arc/registry checkstyle:
+        commands:
+        - /usr/bin/env sh .sqa/script.seedy-ultramarine-bear.sh
+        container: qc.sty_randy-maroon-coati
+  QC.Ver:
+    repos:
+      github.com/madgeek-arc/registry get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.ready-zucchini-liger.sh
+        container: qc.ver_scanty-ruby-beaver
+timeout: 5400
